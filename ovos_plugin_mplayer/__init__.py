@@ -1,8 +1,6 @@
 from ovos_utils.log import LOG
-from mycroft_bus_client.message import Message
 from ovos_plugin_common_play.ocp.base import OCPAudioPlayerBackend
 from py_mplayer import MplayerCtrl
-import time
 
 
 mplayerAudioPluginConfig = {
@@ -45,6 +43,7 @@ class OVOSmplayerService(OCPAudioPlayerBackend):
         self.mpc.playing = False
         if self._track_start_callback:
             self._track_start_callback(None)
+        self.ocp_stop()
 
     # audio service
     def supported_uris(self):
