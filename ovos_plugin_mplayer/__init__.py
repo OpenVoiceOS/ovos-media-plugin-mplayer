@@ -1,22 +1,13 @@
+from ovos_plugin_manager.templates.media import AudioPlayerBackend
 from ovos_utils.log import LOG
-from ovos_plugin_common_play.ocp.base import OCPAudioPlayerBackend
 from py_mplayer import MplayerCtrl
 
 
-mplayerAudioPluginConfig = {
-    "mplayer": {
-        "type": "ovos_mplayer",
-        "active": True
-    }
-}
-
-
-class OVOSmplayerService(OCPAudioPlayerBackend):
-    def __init__(self, config, bus=None, name='ovos_mplayer'):
-        super(OVOSmplayerService, self).__init__(config, bus)
+class OVOSmplayerService(AudioPlayerBackend):
+    def __init__(self, config, bus=None):
+        super().__init__(config, bus)
         self.config = config
         self.bus = bus
-        self.name = name
 
         self.index = 0
         self.normal_volume = None
@@ -61,7 +52,6 @@ class OVOSmplayerService(OCPAudioPlayerBackend):
         LOG.info('mplayerService Stop')
         if self.mpc.playing:
             self.mpc.stop()
-            self.ocp_stop()  # emit ocp state events
             return True
         return False
 
@@ -69,13 +59,11 @@ class OVOSmplayerService(OCPAudioPlayerBackend):
         """ Pause mplayer playback. """
         if not self.mpc.paused:
             self.mpc.pause()
-            self.ocp_pause()  # emit ocp state events
 
     def resume(self):
         """ Resume paused playback. """
         if self.mpc.paused:
             self.mpc.pause()
-            self.ocp_resume()  # emit ocp state events
 
     def track_info(self):
         """ Extract info of current track. """
@@ -116,11 +104,3 @@ class OVOSmplayerService(OCPAudioPlayerBackend):
         """
         self.mpc.destroy()
 
-
-def load_service(base_config, bus):
-    backends = base_config.get('backends', [])
-    services = [(b, backends[b]) for b in backends
-                if backends[b]['type'] in ["mplayer", 'ovos_mplayer'] and
-                backends[b].get('active', False)]
-    instances = [OVOSmplayerService(s[1], bus, s[0]) for s in services]
-    return instances
