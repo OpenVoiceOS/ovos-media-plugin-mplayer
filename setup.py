@@ -49,21 +49,19 @@ def required(requirements_file):
                 if pkg.strip() and not pkg.startswith("#")]
 
 
-PLUGIN_ENTRY_POINT = 'ovos_mplayer=ovos_plugin_mplayer'
-PLUGIN_CONFIG_ENTRY_POINT = 'ovos_mplayer.config=ovos_plugin_mplayer:mplayerAudioPluginConfig'
+PLUGIN_ENTRY_POINT = 'ovos-media-audio-plugin-mplayer=ovos_plugin_mplayer.MplayerOCPAudioService'
 
 setup(
-    name='ovos_plugin_mplayer',
+    name='ovos-media-plugin-mplayer',
     version=get_version(),
     description='mplayer plugin for ovos',
-    url='https://github.com/OpenVoiceOS/ovos-mplayer-plugin',
+    url='https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer',
     author='JarbasAi',
     author_email='jarbasai@mailfence.com',
     license='Apache-2.0',
     packages=['ovos_plugin_mplayer'],
     install_requires=required("requirements/requirements.txt"),
     package_data={'': package_files('ovos_plugin_mplayer')},
-    keywords='ovos audio plugin',
-    entry_points={'mycroft.plugin.audioservice': PLUGIN_ENTRY_POINT,
-                  'mycroft.plugin.audioservice.config': PLUGIN_CONFIG_ENTRY_POINT}
+    keywords='ovos audio video OCP plugin',
+    entry_points={'opm.media.audio': PLUGIN_ENTRY_POINT}
 )

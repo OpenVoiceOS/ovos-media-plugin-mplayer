@@ -3,7 +3,7 @@ from ovos_utils.log import LOG
 from py_mplayer import MplayerCtrl
 
 
-class OVOSmplayerService(AudioPlayerBackend):
+class MplayerOCPAudioService(AudioPlayerBackend):
     def __init__(self, config, bus=None):
         super().__init__(config, bus)
         self.config = config
