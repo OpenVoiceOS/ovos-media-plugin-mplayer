@@ -760,6 +760,7 @@ class MplayerCtrl:
         self.keep_pause = keep_pause
 
         self.playing = False
+        self.allow_controls = True
         self.debug = debug
         self.args = []
         self._process = None
@@ -791,7 +792,7 @@ class MplayerCtrl:
             if not tup[0] in args:
                 args.extend(tup)
 
-        if not '-input' in args:
+        if not self.allow_controls:
             args.extend(
                 ('-input', 'conf=/dev/null', '-input', 'nodefault-bindings'))
         # -
