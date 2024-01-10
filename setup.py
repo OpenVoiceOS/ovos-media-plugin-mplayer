@@ -50,6 +50,7 @@ def required(requirements_file):
 
 
 PLUGIN_ENTRY_POINT = 'ovos-media-audio-plugin-mplayer=ovos_plugin_mplayer.MplayerOCPAudioService'
+VIDEO_ENTRY_POINT = 'ovos-media-video-plugin-mplayer=ovos_plugin_mplayer:MplayerOCPVideoService'
 
 setup(
     name='ovos-media-plugin-mplayer',
@@ -63,5 +64,6 @@ setup(
     install_requires=required("requirements/requirements.txt"),
     package_data={'': package_files('ovos_plugin_mplayer')},
     keywords='ovos audio video OCP plugin',
-    entry_points={'opm.media.audio': PLUGIN_ENTRY_POINT}
+    entry_points={'opm.media.audio': PLUGIN_ENTRY_POINT,
+                  'opm.media.video': VIDEO_ENTRY_POINT}
 )
