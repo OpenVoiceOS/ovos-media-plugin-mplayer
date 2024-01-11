@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/HEAD)
+## [V0.1.0a2](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/V0.1.0a2) (2024-01-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.0.0...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.0.0...V0.1.0a2)
 
 **Implemented enhancements:**
 
