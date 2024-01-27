@@ -1,8 +1,24 @@
 # Changelog
 
-## [V0.0.0a1](https://github.com/OpenVoiceOS/ovos-mplayer-plugin/tree/V0.0.0a1) (2022-08-06)
+## [V0.1.0a2](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/V0.1.0a2) (2024-01-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-mplayer-plugin/compare/466a6a219f4e3b7c293e929e586243af8a7a39ba...V0.0.0a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.0.0...V0.1.0a2)
+
+**Implemented enhancements:**
+
+- latest OCP [\#2](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/pull/2) ([NeonJarbas](https://github.com/NeonJarbas))
+
+**Closed issues:**
+
+- Won't load on newer alpha 0.0.8 versions [\#1](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/issues/1)
+
+## [V0.0.0](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/V0.0.0) (2022-08-06)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.0.0a1...V0.0.0)
+
+## [V0.0.0a1](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/V0.0.0a1) (2022-08-06)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/466a6a219f4e3b7c293e929e586243af8a7a39ba...V0.0.0a1)
 
 
 
