@@ -8,6 +8,12 @@ Mplayer plugin for [ovos-media](https://github.com/OpenVoiceOS/ovos-media)
 
 ## Configuration
 
+
+:construction: this plugin can **only** be used for **either video or audio** :construction: 
+
+using both at same time is currently unsupported, it will load but causes double playback
+
+
 ```javascript
 {
  "media": {
