@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-media-plugin-mplayer"
+dynamic = ["version"]
+description = "mplayer plugin for ovos"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [
+    { name = "JarbasAi", email = "jarbasai@mailfence.com" },
+]
+keywords = ["ovos", "audio", "video", "OCP", "plugin"]
+dependencies = [
+    "ovos-plugin-manager>=2.1.0,<3.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[project.urls]
+Homepage = "https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer"
+
+[project.entry-points."opm.media.audio"]
+ovos-media-audio-plugin-mplayer = "ovos_plugin_mplayer.MplayerOCPAudioService"
+
+[project.entry-points."opm.media.video"]
+ovos-media-video-plugin-mplayer = "ovos_plugin_mplayer:MplayerOCPVideoService"
+
+[tool.setuptools.dynamic]
+version = { attr = "ovos_plugin_mplayer.version.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ovos_plugin_mplayer*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.voc", "*.intent", "*.dialog"]
