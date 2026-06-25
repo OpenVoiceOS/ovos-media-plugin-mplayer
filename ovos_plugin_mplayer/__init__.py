@@ -8,6 +8,16 @@ from ovos_plugin_mplayer.mplayerlib import MplayerCtrl
 class MplayerBaseService(MediaBackend):
     def __init__(self, config, bus=None, video=False):
         super().__init__(config, bus)
+        self._init_mplayer(config, bus, video=video)
+
+    def _init_mplayer(self, config, bus=None, video=False):
+        """Set up the mplayer engine + event handlers.
+
+        Factored out of ``__init__`` so it can be shared by both the new
+        ``MediaBackend`` (ovos-media) backends and the legacy ``AudioBackend``
+        (ovos-audio) adapter, which have different base-class constructors but
+        drive the same mplayer engine underneath.
+        """
         self.config = config
         self.bus = bus
 
