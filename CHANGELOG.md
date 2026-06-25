@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0a2](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/0.2.0a2) (2026-06-25)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/0.2.0a1...0.2.0a2)
+
+**Merged pull requests:**
+
+- test: end-to-end test via ovoscope OCPPlayerHarness [\#22](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/pull/22) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.2.0a1](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/0.2.0a1) (2026-06-25)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/0.1.0a4...0.2.0a1)
