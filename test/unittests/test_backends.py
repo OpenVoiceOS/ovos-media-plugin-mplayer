@@ -24,6 +24,14 @@ from ovos_plugin_manager.templates.media import (
     AudioPlayerBackend, VideoPlayerBackend)
 from ovos_plugin_manager.templates.audio import AudioBackend
 
+import ovos_plugin_mplayer
+# Force-mock the MplayerCtrl bound in the package namespace. The sys.modules stub
+# above only wins if this module is imported first; a sibling test (e.g. test_e2e)
+# that imports the package earlier would already have bound the real MplayerCtrl
+# (which spawns the `mplayer` binary at construction). Patching the package symbol
+# makes the contract tests order-independent.
+ovos_plugin_mplayer.MplayerCtrl = MagicMock()
+
 from ovos_plugin_mplayer import (
     MplayerBaseService, MplayerOCPAudioService, MplayerOCPVideoService)
 from ovos_plugin_mplayer.audio import MplayerAudioService, load_service
