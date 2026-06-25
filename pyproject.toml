@@ -30,6 +30,10 @@ ovos-media-audio-plugin-mplayer = "ovos_plugin_mplayer.MplayerOCPAudioService"
 [project.entry-points."opm.media.video"]
 ovos-media-video-plugin-mplayer = "ovos_plugin_mplayer:MplayerOCPVideoService"
 
+# legacy ovos-audio service backend (so the plugin works on both stacks)
+[project.entry-points."mycroft.plugin.audioservice"]
+ovos_mplayer = "ovos_plugin_mplayer.audio"
+
 [tool.setuptools.dynamic]
 version = { attr = "ovos_plugin_mplayer.version.__version__" }
 
