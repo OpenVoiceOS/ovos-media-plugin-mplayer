@@ -1,8 +1,16 @@
 # Changelog
 
+## [0.2.0a1](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/0.2.0a1) (2026-06-25)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/0.1.0a4...0.2.0a1)
+
+**Merged pull requests:**
+
+- feat: dual-target — add legacy ovos-audio service entry point [\#20](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/pull/20) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.1.0a4](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/0.1.0a4) (2026-06-17)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.1.0a3...0.1.0a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.1.0a2...0.1.0a4)
 
 **Merged pull requests:**
 
@@ -15,13 +23,13 @@
 - chore: Configure Renovate [\#5](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/pull/5) ([renovate[bot]](https://github.com/apps/renovate))
 - fix: compatibility with ovos-plugin-manager 1.X.X [\#4](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/pull/4) ([JarbasAl](https://github.com/JarbasAl))
 
-## [V0.1.0a3](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/V0.1.0a3) (2024-01-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.1.0a2...V0.1.0a3)
-
 ## [V0.1.0a2](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/V0.1.0a2) (2024-01-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.0.0...V0.1.0a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.1.0a3...V0.1.0a2)
+
+## [V0.1.0a3](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/V0.1.0a3) (2024-01-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/V0.0.0...V0.1.0a3)
 
 **Implemented enhancements:**
 
