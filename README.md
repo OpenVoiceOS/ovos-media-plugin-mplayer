@@ -1,18 +1,20 @@
 # ovos-media-plugin-mplayer
 
-Mplayer plugin for [ovos-media](https://github.com/OpenVoiceOS/ovos-media)
+This plugin adds mplayer as an audio and video backend for [ovos-media](https://github.com/OpenVoiceOS/ovos-media).
 
 ## Install
 
-`pip install ovos-media-plugin-mplayer`
+Run this command to install the plugin.
+
+```
+pip install ovos-media-plugin-mplayer
+```
 
 ## Configuration
 
+This plugin supports either audio or video playback, not both at the same time. If you enable both, the plugin loads but plays each stream twice.
 
-:construction: this plugin can **only** be used for **either video or audio** :construction: 
-
-using both at same time is currently unsupported, it will load but causes double playback
-
+Add the plugin to the `media` section of your OVOS configuration. Set `mplayer` in `preferred_audio_services` or `preferred_video_services` to select it.
 
 ```javascript
 {
@@ -57,3 +59,7 @@ using both at same time is currently unsupported, it will load but causes double
     }
 }
 ```
+
+## Related projects
+
+- [ovos-media](https://github.com/OpenVoiceOS/ovos-media) — the media service this plugin extends.
