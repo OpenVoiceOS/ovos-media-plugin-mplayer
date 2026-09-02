@@ -46,11 +46,16 @@ class MplayerBaseService(MediaBackend):
 
     def handle_media_finished(self, evt):
         LOG.debug('mplayer playback ended')
-        self._now_playing = None
         self.mpc.playing = False
         self._paused = False
         if self._track_start_callback:
             self._track_start_callback(None)
+        # natural end-of-media (mplayer reached end on its own, no stop()
+        # requested by us) - ocp_stop() is idempotent (no-ops once
+        # self._now_playing is None), so it is safe to call here even
+        # when stop() already triggered it; this is the only path that
+        # reports a *natural* end-of-media upward
+        self.ocp_stop()
 
     # audio service
     def supported_uris(self):
