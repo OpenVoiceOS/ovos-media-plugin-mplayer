@@ -1,11 +1,15 @@
 import time
 
-from ovos_plugin_manager.templates.media import MediaBackend, AudioPlayerBackend, VideoPlayerBackend
+from ovos_plugin_manager.templates.media import (
+    MediaBackend, AudioPlayerBackend, VideoPlayerBackend, PlaybackEvent)
 from ovos_utils.log import LOG
 from ovos_plugin_mplayer.mplayerlib import MplayerCtrl
 
 
 class MplayerBaseService(MediaBackend):
+    can_seek = True
+    can_pause = True
+
     def __init__(self, config, bus=None, video=False):
         super().__init__(config, bus)
         self._init_mplayer(config, bus, video=video)
@@ -27,6 +31,13 @@ class MplayerBaseService(MediaBackend):
         self.is_video = video
         self._paused = False
         self.tracks = []
+        self._loaded_uri = None
+        # seeded here (not just in MediaBackend.__init__) because the legacy
+        # ovos-audio adapter (MplayerAudioService) calls AudioBackend.__init__
+        # instead of MediaBackend.__init__, then drives this shared setup -
+        # without this, report_track_end() would AttributeError on a legacy
+        # instance that never called stop()
+        self._stop_requested = False
         self.mpc = MplayerCtrl(mplayer_args=["-novideo"] if not video else [])
 
         self.mpc.on_media_started = self.handle_media_started
@@ -35,36 +46,47 @@ class MplayerBaseService(MediaBackend):
 
     # mplayer internals
     def handle_mplayer_error(self, evt):
-        self.ocp_error()
+        # a distinct stderr signal, not an end-of-track callback - it may
+        # fire without the process/track ending at all, so it is reported
+        # directly rather than through report_track_end (which is only for
+        # callbacks that cannot themselves tell a requested stop from a
+        # natural end)
+        error = evt.get("data") if isinstance(evt, dict) else str(evt)
+        self.report(PlaybackEvent.ERROR, error=error, uri=self._loaded_uri)
 
     def handle_media_started(self, evt):
         LOG.debug('mplayer playback start')
         self.mpc.playing = True
         self._paused = False
-        if self._track_start_callback:
-            self._track_start_callback(self.track_info().get('name', "track"))
+        self.report(PlaybackEvent.TRACK_START, uri=self._loaded_uri)
 
     def handle_media_finished(self, evt):
         LOG.debug('mplayer playback ended')
         self.mpc.playing = False
         self._paused = False
-        if self._track_start_callback:
-            self._track_start_callback(None)
-        # natural end-of-media (mplayer reached end on its own, no stop()
-        # requested by us) - ocp_stop() is idempotent (no-ops once
-        # self._now_playing is None), so it is safe to call here even
-        # when stop() already triggered it; this is the only path that
-        # reports a *natural* end-of-media upward
-        self.ocp_stop()
+        # mplayer's on_media_finished callback fires the same way whether
+        # we called stop() or the track simply ran out - it does not expose
+        # a return/exit code that could distinguish a clean end from a
+        # failure, so this is exactly the ambiguous callback
+        # report_track_end exists for: it consults self._stop_requested
+        # (set by the template's stop()) to report STOPPED vs
+        # END_OF_MEDIA, and clears the flag afterward.
+        self.report_track_end(uri=self._loaded_uri)
 
     # audio service
     def supported_uris(self):
         return ['file', 'http', 'https']
 
-    def play(self, repeat=False):
-        """ Play playlist using mplayer. """
+    def load_track(self, uri: str, metadata: dict = None) -> bool:
+        """ Load track using mplayer. """
+        LOG.debug('mplayerService Load')
+        self.mpc.loadfile(uri)
+        self._loaded_uri = uri
+        return True
+
+    def play(self):
+        """ Play the loaded track using mplayer. """
         LOG.debug('mplayerService Play')
-        self.mpc.loadfile(self._now_playing)
         self.mpc.set_property("volume", 100)
         if self.is_video:
             if self.config.get("fullscreen", True):
@@ -73,7 +95,7 @@ class MplayerBaseService(MediaBackend):
                 self.mpc.set_property('fullscreen', 0)
         self.mpc.playing = True
 
-    def stop(self):
+    def _stop(self):
         """ Stop mplayer playback. """
         LOG.info('mplayerService Stop')
         if self.mpc.playing:
