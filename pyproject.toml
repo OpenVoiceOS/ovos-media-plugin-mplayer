@@ -29,7 +29,7 @@ test = [
 Homepage = "https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer"
 
 [project.entry-points."opm.media.audio"]
-ovos-media-audio-plugin-mplayer = "ovos_plugin_mplayer.MplayerOCPAudioService"
+ovos-media-audio-plugin-mplayer = "ovos_plugin_mplayer:MplayerOCPAudioService"
 
 [project.entry-points."opm.media.video"]
 ovos-media-video-plugin-mplayer = "ovos_plugin_mplayer:MplayerOCPVideoService"
