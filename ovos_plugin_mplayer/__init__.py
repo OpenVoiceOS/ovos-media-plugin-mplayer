@@ -109,16 +109,30 @@ class MplayerBaseService(MediaBackend):
     def get_track_length(self):
         """
         getting the duration of the audio in milliseconds
+
+        None when nothing is playing, and -1 for a live stream, which has no
+        length to report. mplayer answers a falsy length for a stream, and
+        passing that through would be a different claim: a track of zero
+        duration.
         """
-        if self.mpc.playing:
-            return self.mpc.get_time_length() * 1000  # seconds to milliseconds
+        if not self.mpc.playing:
+            return None
+        length = self.mpc.get_time_length()
+        if not length:
+            return -1  # a live stream has no length
+        return length * 1000  # seconds to milliseconds
 
     def get_track_position(self):
         """
         get current position in milliseconds
+
+        None when nothing is playing. A caller computing a relative seek skips
+        it on None, which is what should happen when there is nothing to seek
+        in.
         """
-        if self.mpc.playing:
-            return self.mpc.get_time_pos() * 1000  # seconds to milliseconds
+        if not self.mpc.playing:
+            return None
+        return self.mpc.get_time_pos() * 1000  # seconds to milliseconds
 
     def set_track_position(self, milliseconds):
         """
