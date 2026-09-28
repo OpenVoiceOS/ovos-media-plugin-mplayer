@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2a1](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/0.2.2a1) (2026-09-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/0.2.1a1...0.2.2a1)
+
+**Merged pull requests:**
+
+- fix: the audio entry point names a class, so the audio backend loads [\#29](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/pull/29) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.2.1a1](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/tree/0.2.1a1) (2026-09-02)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-media-plugin-mplayer/compare/0.2.0a3...0.2.1a1)
