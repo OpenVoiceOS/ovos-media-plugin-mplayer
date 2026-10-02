@@ -116,9 +116,19 @@ class MplayerBaseService(MediaBackend):
     def get_track_position(self):
         """
         get current position in milliseconds
+
+        mplayer can still answer None here even though self.mpc.playing was
+        True a moment ago: playback can stop between that check and this
+        call, and the engine then has no position to report. That resolves
+        to "not playing", so it gets the same None that MediaBackend's
+        get_track_position defines for nothing playing, rather than raising
+        on the multiplication below.
         """
         if self.mpc.playing:
-            return self.mpc.get_time_pos() * 1000  # seconds to milliseconds
+            position = self.mpc.get_time_pos()
+            if position is None:
+                return None
+            return position * 1000  # seconds to milliseconds
 
     def set_track_position(self, milliseconds):
         """
